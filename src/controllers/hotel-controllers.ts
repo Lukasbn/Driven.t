@@ -10,7 +10,7 @@ export async function getHotels(req:AuthenticatedRequest,res:Response){
         res.send(result)
     } catch(error){
         if(error.name === "NotFoundError"){
-            return res.status(404).send("Not Found")
+            return res.sendStatus(httpStatus.NOT_FOUND)
         }
 
         if(error.name === "PaymentRequired"){
@@ -27,10 +27,10 @@ export async function getHotelById(req: AuthenticatedRequest, res: Response){
     const HID = Number(hotelId)
     try{
         const result = await getHotelByIdService(id,HID)
-
+        res.send(result)
     }catch(error){
         if(error.name === "NotFoundError"){
-            return res.status(404).send("Not Found")
+            return res.sendStatus(httpStatus.NOT_FOUND)
         }
 
         if(error.name === "PaymentRequired"){

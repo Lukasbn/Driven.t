@@ -6,6 +6,6 @@ const hotelsRouters = Router()
 
 hotelsRouters.use(authenticateToken)
 hotelsRouters.get("/", getHotels)
-hotelsRouters.get('/:hotelId', getHotelById)
+hotelsRouters.get("/:hotelId", getHotelById)
 
 export {hotelsRouters}

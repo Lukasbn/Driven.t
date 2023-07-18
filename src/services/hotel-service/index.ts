@@ -5,33 +5,34 @@ import ticketsRepository from "@/repositories/tickets-repository"
 
 export async function getHotelService(id: number){
     const enrollment = await enrollmentRepository.findWithAddressByUserId(id)
-    if(!enrollment) throw notFoundError
+    if(!enrollment) throw notFoundError()
 
     const ticket  = await ticketsRepository.findTicketByEnrollmentId(enrollment.id)
-    if(!ticket) throw notFoundError
+    if(!ticket) throw notFoundError()
 
     if(ticket.status === "RESERVED" || ticket.TicketType.isRemote || !ticket.TicketType.createdAt){
-        throw paymentRequiredError
+        throw paymentRequiredError()
     }
 
     const hotels = await hotelRepository.getHotelsDB()
+    if(hotels.length === 0) throw notFoundError()
     return hotels
 }
 
 export async function getHotelByIdService(id:number, HID:number){
     const enrollment = await enrollmentRepository.findWithAddressByUserId(id)
-    if(!enrollment) throw notFoundError
+    if(!enrollment) throw notFoundError()
 
     const ticket  = await ticketsRepository.findTicketByEnrollmentId(enrollment.id)
-    if(!ticket) throw notFoundError
+    if(!ticket) throw notFoundError()
 
     if(ticket.status === "RESERVED" || ticket.TicketType.isRemote || !ticket.TicketType.createdAt){
-        throw paymentRequiredError
+        throw paymentRequiredError()
     }
 
-    const result = hotelRepository.getHotelByIdDB(HID)
+    const result = await hotelRepository.getHotelByIdDB(HID)
 
-    if(!result) throw notFoundError
+    if(!result) throw notFoundError()
     return result
 }
 
