@@ -1,13 +1,11 @@
 import { Router} from "express";
 import { authenticateToken } from "@/middlewares";
+import { getHotelById, getHotels } from "@/controllers/hotel-controllers";
 
 const hotelsRouters = Router()
 
 hotelsRouters.use(authenticateToken)
-hotelsRouters.get("/", (req,res)=>{res.send("ta runfando pai")})
-hotelsRouters.get('/:id', (req,res)=>{
-    const {id} = req.params
-    res.send(`o id informado é ${id}`)
-})
+hotelsRouters.get("/", getHotels)
+hotelsRouters.get('/:hotelId', getHotelById)
 
 export {hotelsRouters}
