@@ -10,7 +10,7 @@ export async function getHotelService(id: number){
     const ticket  = await ticketsRepository.findTicketByEnrollmentId(enrollment.id)
     if(!ticket) throw notFoundError()
 
-    if(ticket.status === "RESERVED" || ticket.TicketType.isRemote || !ticket.TicketType.createdAt){
+    if(ticket.status === "RESERVED" || ticket.TicketType.isRemote || !ticket.TicketType.includesHotel){
         throw paymentRequiredError()
     }
 
@@ -26,7 +26,7 @@ export async function getHotelByIdService(id:number, HID:number){
     const ticket  = await ticketsRepository.findTicketByEnrollmentId(enrollment.id)
     if(!ticket) throw notFoundError()
 
-    if(ticket.status === "RESERVED" || ticket.TicketType.isRemote || !ticket.TicketType.createdAt){
+    if(ticket.status === "RESERVED" || ticket.TicketType.isRemote || !ticket.TicketType.includesHotel){
         throw paymentRequiredError()
     }
 
