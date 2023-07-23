@@ -21,6 +21,7 @@ export async function postBooking(req: AuthenticatedRequest, res: Response) {
     if(isNaN(roomId) || !roomId) return res.sendStatus(httpStatus.FORBIDDEN)
     try {
         const result = await bookingService.postBooking(userId,roomId)
+        res.send(result)
     } catch (error) {
         if (error.name === 'NotFoundError') {
             return res.sendStatus(httpStatus.NOT_FOUND);

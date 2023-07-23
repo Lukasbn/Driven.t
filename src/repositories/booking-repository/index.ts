@@ -1,13 +1,13 @@
 import { prisma } from '@/config';
 
 async function getBookingByUserIdDB(userId: number){
-    const result = await prisma.booking.findUnique({
+    const result = await prisma.booking.findFirst({
         select:{
           id:true,
           Room:true  
         },
         where:{
-            id: userId
+            userId
         }
     })
     return result
@@ -36,14 +36,14 @@ async function postBookingDB(userId:number, roomId: number){
             userId
         }
     })
-
     return result
 }
 
 async function putBookingDB(roomId:number, bookingId:number){
     const result = await prisma.booking.update({
         data:{
-            roomId
+            roomId,
+            updatedAt: new Date(Date.now())
         },
         where:{
             id: bookingId
