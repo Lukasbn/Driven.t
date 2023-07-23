@@ -39,7 +39,7 @@ export async function putBooking(req: AuthenticatedRequest, res: Response) {
     const BID = Number(bookingId)
     if(isNaN(roomId) || !roomId || isNaN(BID) || !bookingId) return res.sendStatus(httpStatus.FORBIDDEN)
     try {
-        const result = bookingService.putBooking(userId,roomId,BID);
+        const result = await bookingService.putBooking(userId,roomId,BID);
         res.send(result)
     } catch (error) {
         if (error.name === 'NotFoundError') {
