@@ -120,7 +120,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/controllers/booking-controler.ts
+SF:src/controllers/booking-controller.ts
 FN:6,getBooking
 FN:18,postBooking
 FN:35,putBooking
